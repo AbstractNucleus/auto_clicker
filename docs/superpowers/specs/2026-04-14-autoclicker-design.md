@@ -30,7 +30,7 @@
 
 ## 2. Stack
 
-- **Language / runtime:** Python 3.12.
+- **Language / runtime:** Python 3.13.
 - **GUI:** PySide6 + `qdarktheme`.
 - **Win32 bindings:** `ctypes` (no `pywin32` dependency — we only need ~10 functions).
 - **Tooling:** `uv` (package/env), `pytest` (tests), `ruff` (+ `ruff format`).
@@ -86,7 +86,7 @@ The composition root is `app.py` — the only module that imports from all three
 
 ```
 auto_clicker/
-├── pyproject.toml              # uv-managed, Python 3.12
+├── pyproject.toml              # uv-managed, Python 3.13
 ├── README.md
 ├── src/
 │   └── auto_clicker/
