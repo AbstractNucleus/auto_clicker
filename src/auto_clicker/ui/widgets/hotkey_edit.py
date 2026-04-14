@@ -7,9 +7,18 @@ from PySide6.QtWidgets import QHBoxLayout, QLabel, QLineEdit, QPushButton, QWidg
 from auto_clicker.hotkeys.backend import KeyBinding
 
 _VK_MAP = {
-    Qt.Key.Key_F1: 0x70, Qt.Key.Key_F2: 0x71, Qt.Key.Key_F3: 0x72, Qt.Key.Key_F4: 0x73,
-    Qt.Key.Key_F5: 0x74, Qt.Key.Key_F6: 0x75, Qt.Key.Key_F7: 0x76, Qt.Key.Key_F8: 0x77,
-    Qt.Key.Key_F9: 0x78, Qt.Key.Key_F10: 0x79, Qt.Key.Key_F11: 0x7A, Qt.Key.Key_F12: 0x7B,
+    Qt.Key.Key_F1: 0x70,
+    Qt.Key.Key_F2: 0x71,
+    Qt.Key.Key_F3: 0x72,
+    Qt.Key.Key_F4: 0x73,
+    Qt.Key.Key_F5: 0x74,
+    Qt.Key.Key_F6: 0x75,
+    Qt.Key.Key_F7: 0x76,
+    Qt.Key.Key_F8: 0x77,
+    Qt.Key.Key_F9: 0x78,
+    Qt.Key.Key_F10: 0x79,
+    Qt.Key.Key_F11: 0x7A,
+    Qt.Key.Key_F12: 0x7B,
 }
 
 _RESERVED = {Qt.Key.Key_Return, Qt.Key.Key_Enter, Qt.Key.Key_Escape, Qt.Key.Key_Tab}

@@ -16,7 +16,9 @@ pytestmark = pytest.mark.skipif(sys.platform != "win32", reason="scheduler requi
 def _run_and_collect(cps: int, target_clicks: int) -> list[int]:
     sink = RecordingSink()
     source = UniformSource(button=Button.LEFT, move_to=None)
-    config = ClickConfig(cps=cps, button=Button.LEFT, cursor_mode=FollowCursor(), trigger_mode=TriggerMode.TOGGLE)
+    config = ClickConfig(
+        cps=cps, button=Button.LEFT, cursor_mode=FollowCursor(), trigger_mode=TriggerMode.TOGGLE
+    )
     scheduler = Scheduler(sink=sink)
     scheduler.run(config=config, source=source, stops=[ClickLimit(count=target_clicks)])
     return [ts for ts, _ in sink.events]

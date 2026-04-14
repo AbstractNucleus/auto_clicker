@@ -26,7 +26,9 @@ _user32.UnregisterHotKey.restype = wintypes.BOOL
 
 def register_hotkey(hwnd: int | None, hotkey_id: int, modifiers: int, vk: int) -> None:
     hwnd_val = wintypes.HWND(hwnd) if hwnd is not None else None
-    if not _user32.RegisterHotKey(hwnd_val, hotkey_id, modifiers | int(HotkeyModifier.NOREPEAT), vk):
+    if not _user32.RegisterHotKey(
+        hwnd_val, hotkey_id, modifiers | int(HotkeyModifier.NOREPEAT), vk
+    ):
         raise ctypes.WinError(ctypes.get_last_error())
 
 

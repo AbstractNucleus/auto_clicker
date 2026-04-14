@@ -14,7 +14,9 @@ pytestmark = pytest.mark.skipif(sys.platform != "win32", reason="engine relies o
 
 
 def _cfg(cps: int = 50) -> ClickConfig:
-    return ClickConfig(cps=cps, button=Button.LEFT, cursor_mode=FollowCursor(), trigger_mode=TriggerMode.TOGGLE)
+    return ClickConfig(
+        cps=cps, button=Button.LEFT, cursor_mode=FollowCursor(), trigger_mode=TriggerMode.TOGGLE
+    )
 
 
 def test_engine_start_then_stop_records_clicks():

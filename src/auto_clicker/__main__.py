@@ -1,6 +1,6 @@
-def main() -> None:
-    raise SystemExit("auto_clicker entrypoint not wired yet")
+from __future__ import annotations
 
+from auto_clicker.app import main
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

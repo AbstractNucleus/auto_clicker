@@ -16,16 +16,22 @@ from auto_clicker.engine.config import (
 
 
 def test_click_config_is_frozen():
-    cfg = ClickConfig(cps=10, button=Button.LEFT, cursor_mode=FollowCursor(), trigger_mode=TriggerMode.TOGGLE)
+    cfg = ClickConfig(
+        cps=10, button=Button.LEFT, cursor_mode=FollowCursor(), trigger_mode=TriggerMode.TOGGLE
+    )
     with pytest.raises(dataclasses.FrozenInstanceError):
         cfg.cps = 20  # type: ignore[misc]
 
 
 def test_click_config_rejects_out_of_range_cps():
     with pytest.raises(ValueError, match="cps must be in 1..100"):
-        ClickConfig(cps=0, button=Button.LEFT, cursor_mode=FollowCursor(), trigger_mode=TriggerMode.TOGGLE)
+        ClickConfig(
+            cps=0, button=Button.LEFT, cursor_mode=FollowCursor(), trigger_mode=TriggerMode.TOGGLE
+        )
     with pytest.raises(ValueError, match="cps must be in 1..100"):
-        ClickConfig(cps=101, button=Button.LEFT, cursor_mode=FollowCursor(), trigger_mode=TriggerMode.TOGGLE)
+        ClickConfig(
+            cps=101, button=Button.LEFT, cursor_mode=FollowCursor(), trigger_mode=TriggerMode.TOGGLE
+        )
 
 
 def test_fixed_point_is_cursor_mode():

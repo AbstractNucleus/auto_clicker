@@ -179,10 +179,19 @@ class MainWindow(QMainWindow):
         self._state_label.setStyleSheet(f"color: {colors.get(state, '#888')};")
         editable = state == "idle"
         for w in (
-            self._cps, self._btn_left, self._btn_right, self._btn_middle,
-            self._cursor_follow, self._cursor_fixed, self._trig_toggle, self._trig_hold,
-            self._hotkey, self._use_duration, self._duration,
-            self._use_click_limit, self._click_limit,
+            self._cps,
+            self._btn_left,
+            self._btn_right,
+            self._btn_middle,
+            self._cursor_follow,
+            self._cursor_fixed,
+            self._trig_toggle,
+            self._trig_hold,
+            self._hotkey,
+            self._use_duration,
+            self._duration,
+            self._use_click_limit,
+            self._click_limit,
         ):
             w.setEnabled(editable)
         self._start_button.setText("STOP" if state == "running" else "START")

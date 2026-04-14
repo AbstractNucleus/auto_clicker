@@ -108,9 +108,7 @@ def install_mouse_hook(
 
     proc = HOOKPROC(_proc)
     with _lock:
-        handle = _user32.SetWindowsHookExW(
-            WH_MOUSE_LL, proc, _kernel32.GetModuleHandleW(None), 0
-        )
+        handle = _user32.SetWindowsHookExW(WH_MOUSE_LL, proc, _kernel32.GetModuleHandleW(None), 0)
     if not handle:
         raise ctypes.WinError(ctypes.get_last_error())
     return HookHandle(handle, proc)

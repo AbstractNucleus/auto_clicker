@@ -82,9 +82,7 @@ def _to_absolute(x: int, y: int) -> tuple[int, int]:
 def _mouse_input(flags: int, dx: int = 0, dy: int = 0) -> INPUT:
     event = INPUT()
     event.type = INPUT_MOUSE
-    event.mi = _MOUSEINPUT(
-        dx=dx, dy=dy, mouseData=0, dwFlags=flags, time=0, dwExtraInfo=None
-    )
+    event.mi = _MOUSEINPUT(dx=dx, dy=dy, mouseData=0, dwFlags=flags, time=0, dwExtraInfo=None)
     return event
 
 
