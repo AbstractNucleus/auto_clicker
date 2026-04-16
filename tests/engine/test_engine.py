@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import threading
 import time
 
 import pytest
@@ -56,6 +57,25 @@ def test_stop_is_quick_within_one_interval():
     engine.stop()
     engine.wait_until_idle(timeout=1.0)
     assert time.perf_counter() - t0 < 0.2
+
+
+def test_on_finished_fires_when_stop_condition_ends_run():
+    sink = RecordingSink()
+    fired = threading.Event()
+    engine = ClickEngine(sink=sink, on_finished=fired.set)
+    engine.start(config=_cfg(50), stops=[ClickLimit(count=5)])
+    assert fired.wait(timeout=2.0)
+    assert engine.wait_until_idle(timeout=0.1)
+
+
+def test_on_finished_fires_when_manual_stop():
+    sink = RecordingSink()
+    fired = threading.Event()
+    engine = ClickEngine(sink=sink, on_finished=fired.set)
+    engine.start(config=_cfg(10), stops=[DurationLimit(seconds=5.0)])
+    time.sleep(0.1)
+    engine.stop()
+    assert fired.wait(timeout=2.0)
 
 
 def test_thread_is_reused_across_runs():

@@ -34,6 +34,7 @@ from auto_clicker.ui.widgets.point_capture import PointCapture
 class MainWindow(QMainWindow):
     start_requested = Signal()
     stop_requested = Signal()
+    run_finished = Signal()
     binding_changed = Signal(object, object)  # KeyBinding, TriggerMode
 
     def __init__(self, parent: QWidget | None = None) -> None:

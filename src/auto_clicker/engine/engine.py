@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import threading
+from collections.abc import Callable
 from dataclasses import dataclass, field
 
 from auto_clicker.engine.config import ClickConfig, FixedPoint
@@ -23,6 +24,7 @@ class _Command:
 @dataclass
 class ClickEngine:
     sink: ClickSink
+    on_finished: Callable[[], None] | None = None
     _scheduler: Scheduler = field(init=False)
     _thread: threading.Thread | None = field(default=None, init=False)
     _cmd: _Command | None = field(default=None, init=False)
@@ -80,3 +82,5 @@ class ClickEngine:
                 self._scheduler.run(config=cmd.config, source=source, stops=cmd.stops)
             finally:
                 self._idle.set()
+                if self.on_finished is not None and not self._shutdown:
+                    self.on_finished()

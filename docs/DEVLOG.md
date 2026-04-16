@@ -4,6 +4,20 @@ Running log of meaningful changes. Newest first. Each entry captures *why* and *
 
 ---
 
+## 2026-04-16 — v0.1 smoke verified + UI auto-reset fix
+
+Ran the Task 17 Step 4 manual checklist. 8/9 items passed on first try. **Bug found:** when a stop condition (`DurationLimit` / `ClickLimit`) ended a run on its own, the UI stayed in `● Running` / `STOP` — the user had to toggle manually.
+
+**Root cause:** `ClickEngine._loop` set `_idle` on the worker thread but had no way to tell the UI. Only the explicit `_stop` handler in `app.py` flipped state back; the natural-end path never touched it.
+
+**Fix:** added optional `on_finished: Callable[[], None]` to `ClickEngine`. The composition root wires it to a new `MainWindow.run_finished` `Signal`; Qt auto-queues cross-thread signal emissions, so the worker-thread `emit()` is safe. Handler resets controller + UI to idle and is idempotent (double-fires harmlessly during manual stop).
+
+Engine stays Qt-free (spec §9.6) — it only knows about a plain callback. Two new tests cover both natural-end and manual-stop paths.
+
+All 30 tests pass, engine + hotkeys coverage at 98.57%.
+
+---
+
 ## 2026-04-14 — v0.1 skeleton complete
 
 Implemented the full v0.1 plan (`docs/superpowers/plans/2026-04-14-autoclicker-implementation.md`) in a single session.

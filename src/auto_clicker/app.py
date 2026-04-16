@@ -45,7 +45,7 @@ def main() -> int:
     apply_theme(app)
 
     window = MainWindow()
-    engine = ClickEngine(sink=SendInputSink())
+    engine = ClickEngine(sink=SendInputSink(), on_finished=window.run_finished.emit)
     backend = Win32Backend()
     controller = HotkeyController(
         backend=backend,
@@ -54,6 +54,7 @@ def main() -> int:
         on_hold_started=lambda: _start(window, engine, controller),
         on_hold_ended=lambda: _stop(window, engine, controller),
     )
+    window.run_finished.connect(lambda: _on_run_finished(window, controller))
 
     filter_ = _HotkeyFilter(backend)
     QCoreApplication.instance().installNativeEventFilter(filter_)  # type: ignore[union-attr]
@@ -89,5 +90,10 @@ def _start(window: MainWindow, engine: ClickEngine, controller: HotkeyController
 def _stop(window: MainWindow, engine: ClickEngine, controller: HotkeyController) -> None:
     engine.stop()
     engine.wait_until_idle(timeout=1.0)
+    controller.mark_idle()
+    window.set_state("idle")
+
+
+def _on_run_finished(window: MainWindow, controller: HotkeyController) -> None:
     controller.mark_idle()
     window.set_state("idle")
