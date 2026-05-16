@@ -47,6 +47,15 @@ uv run ruff check
 uv run ruff format
 ```
 
+## Build a standalone exe
+
+```powershell
+uv sync
+uv run pyinstaller --onefile --windowed --name auto_clicker src/auto_clicker/__main__.py
+```
+
+The single-file build lands at `dist/auto_clicker.exe` (~46 MB). The first launch is slower than subsequent ones because PyInstaller unpacks the bundle to a temp dir. Prebuilt binaries for tagged releases are attached to the [GitHub Releases](https://github.com/AbstractNucleus/auto_clicker/releases).
+
 Layout:
 
 | Layer | Contents |
