@@ -5,7 +5,7 @@ Windows autoclicker. Python 3.13, PySide6.
 Features:
 
 - Up to 100 CPS using a `QueryPerformanceCounter` scheduler with `timeBeginPeriod(1)` and sleep-then-spin waiting.
-- Global hotkeys (F1 to F12) in toggle or hold mode, via `RegisterHotKey` and low-level keyboard hooks.
+- Global hotkeys (F1 to F12, default F6) in toggle or hold mode, via `RegisterHotKey` and low-level keyboard hooks.
 - Follow-cursor or fixed-point click target. Left, right, or middle button.
 - Optional duration and click-count stop conditions.
 - Qt is confined to the UI layer; the engine has no Qt dependency.
@@ -54,7 +54,7 @@ uv sync
 uv run pyinstaller --onefile --windowed --name auto_clicker src/auto_clicker/__main__.py
 ```
 
-The single-file build lands at `dist/auto_clicker.exe` (~46 MB). The first launch is slower than subsequent ones because PyInstaller unpacks the bundle to a temp dir. Prebuilt binaries for tagged releases are attached to the [GitHub Releases](https://github.com/AbstractNucleus/auto_clicker/releases).
+The single-file build lands at `dist/auto_clicker.exe` (~46 MB). Prebuilt binaries for tagged releases are attached to the [GitHub Releases](https://github.com/AbstractNucleus/auto_clicker/releases).
 
 Layout:
 
@@ -69,9 +69,7 @@ UI and `win32/` are excluded from coverage. They depend on the Windows event loo
 
 ## Disclaimer
 
-Meant for legitimate uses: testing, accessibility, automating your own software, and similar workflows where automated input is allowed.
-
-Plenty of online services and games forbid automated input under their terms of service or anti-cheat rules. Don't use this to violate any service's terms, gain an advantage in competitive play, or get around anti-cheat. That's on you.
+Meant for legitimate uses (testing, accessibility, automating your own software). Don't use it to violate any service's terms or get around anti-cheat. That's on you.
 
 ## License
 
